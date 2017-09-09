@@ -79,7 +79,9 @@ def fetch_all_parents(hits)
   hits.each do |hit|
     if hit['parent_id'] != hit['story_id']
       threads << Thread.new(hit) do |hit|
+        puts "Fetching #{hit['parent_id']}"
         parent = fetch_item(hit['parent_id'])
+        puts "Done     #{hit['parent_id']}"
         hit[:parent] = parent
       end
     end
