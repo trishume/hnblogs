@@ -1,0 +1,66 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Interesting HN Comments</title>
+    <style type="text/css">
+        body {
+            margin: 40px auto;
+            max-width: 650px;
+            line-height: 1.6;
+            font-size: 18px;
+            color: #444;
+            padding: 0 10px
+        }
+
+        h1,
+        h2,
+        h3 {
+            line-height: 1.2
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Interesting Hacker News Comments Feed</h1>
+        <aside>An Atom feed of interesting HN commenters</aside>
+    </header>
+    <p><strong>Follow everything written by interesting people.</strong></p>
+    <p>This web app uses <a href="https://hn.algolia.com/api">Algolia's HN API</a> as well as the <a href="https://github.com/HackerNews/API">official FireBase API</a> to create an Atom/RSS feed of all the comments by these people, including useful links and the text of the parent comment.</p>
+    <h2>How to <a href="/feed.xml">subscribe</a></h2>
+    <p>
+        Add <strong><a href="/feed.xml">this feed</a></strong> to your favourite feed reader.
+        However, in order to save my tiny server and the HN APIs, I suggest using <a href="https://feedly.com/">Feedly</a>, which will share polling between many users.
+    </p>
+
+    <h2>Included commenters</h2>
+    <p>I've found that all of these people consistently write high-quality Hacker News comments. They're also all experts at one thing or another. You can think of this feed as subscribing to their mini-blogs.</p>
+    <ul>
+    <% users.each do |user| %>
+    <li>
+        <strong><a href="https://news.ycombinator.com/user?id=<%= user %>"><%= user %></a></strong>
+        <% if descriptions[user] %>
+        : <%= descriptions[user] %>
+        <% end %>
+    </li>
+    <% end %>
+    </ul>
+
+    <h2>Custom Feeds</h2>
+    <p>If you don't like my user set, you can email me to suggest changes or additions at <a href="mailto:tristan@thume.ca">tristan@thume.ca</a>, or you can use a custom user list.</p>
+
+    <p>You can use a custom subscription URL to subscribe to exactly the users you want, like this:</p>
+
+    <code><pre>
+http://hnblogs.thume.ca/customfeed.xml?users=jblow,pcwalton,patio11</pre></code>
+
+    <p>If too many people do this though, I'll probably either overload my server or get rate limited by the APIs since I can't cache these. This would cause me to cease offering this service publicly, which would be sad.</p>
+
+    <h2>Who made this?</h2>
+    I'm <a href="http://thume.ca/">Tristan Hume</a> and I made this with Ruby and <a href="http://www.sinatrarb.com/">Sinatra</a>.
+</body>
+<div></div>
+
+</html>
