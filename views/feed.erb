@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title>HN Comments</title>
+  <link href="http://hnblogs.thume.net/feed.xml" rel="self"/>
+  <link href="http://hnblogs.thume.net/" />
+  <updated><%= DateTime.now.rfc3339 %></updated>
+  <author>
+    <name>Tristan Hume</name>
+  </author>
+  <id>http://hnblogs.thume.net/</id>
+
+  <% items.each do |item| %>
+  <entry>
+    <title><%= item['author'] %> commented on "<%= item['story_title'] %>"</title>
+    <link href="https://news.ycombinator.com/item?id=<%= item['objectID'] %>"/>
+    <id>https://news.ycombinator.com/item?id=<%= item['objectID'] %></id>
+    <updated><%= item['created_at'] %></updated>
+    <content type="html"><%= item[:encoded_content] %></content>
+  </entry>
+  <% end %>
+
+</feed>
