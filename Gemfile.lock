@@ -5,6 +5,7 @@ GEM
       multi_xml (>= 0.5.2)
     multi_xml (0.6.0)
     mustermann (1.0.1)
+    puma (3.10.0)
     rack (2.0.3)
     rack-protection (2.0.0)
       rack
@@ -20,6 +21,7 @@ PLATFORMS
 
 DEPENDENCIES
   httparty!
+  puma!
   sinatra!
 
 BUNDLED WITH

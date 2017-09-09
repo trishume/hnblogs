@@ -57,6 +57,7 @@ end
 
 configure do
   mime_type :atom, 'application/atom+xml'
+  set :server, :puma
 end
 
 def item_content(hit)
