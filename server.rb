@@ -96,7 +96,7 @@ def fetch_data(users)
   response = HTTParty.get(url)
   hits = response['hits']
   raise FetchFailed, response.inspect unless hits
-  fetch_all_parents(hits)
+  # fetch_all_parents(hits)
   hits.each do |hit|
     content = item_content(hit)
     hit[:encoded_content] = CGI.escapeHTML(content)
