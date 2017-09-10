@@ -1,8 +1,9 @@
 require 'sinatra'
-require 'httparty'
+require 'typhoeus'
 require 'cgi'
 require 'pp'
 require 'erb'
+require 'json'
 
 USERS = %w{
   pizlonator pcwalton jblow WalterBright
@@ -64,39 +65,65 @@ def item_content(hit)
   ITEM_TEMPLATE.result(binding)
 end
 
-def fetch_item(id)
+# def fetch_item(id)
+#   url = "http://hn.algolia.com/api/v1/items/#{id}"
+#   puts "Fetching #{id} from #{url}"
+#   response = HTTParty.get(url)
+#   return nil
+#   item = response.parsed_response
+#   raise FetchFailed, response.inspect unless item
+#   # pp item
+#   # item
+#   {'text' => item['comment_text'], 'by' => item['author']}
+# end
+
+# def fetch_all_parents(hits)
+#   threads = []
+
+#   hits.each do |hit|
+#     if hit['parent_id'] != hit['story_id']
+#       threads << Thread.new(hit) do |hit|
+#         parent = fetch_item(hit['parent_id'])
+#         puts "Done     #{hit['parent_id']}"
+#         hit[:parent] = parent
+#       end
+#     end
+#   end
+
+#   threads.each(&:join)
+# end
+
+def fetch_item(id, hit, hydra)
   url = "https://hacker-news.firebaseio.com/v0/item/#{id}.json"
-  response = HTTParty.get(url)
-  item = response.parsed_response
-  raise FetchFailed, response.inspect unless item
-  # pp item
-  item
+  puts "Fetching #{id} from #{url}"
+  req = Typhoeus::Request.new(url)
+  req.on_complete do |response|
+    puts "Done #{id}"
+    item = JSON.parse(response.body)
+    hit[:parent] = item
+  end
+  hydra.queue req
 end
 
 def fetch_all_parents(hits)
-  threads = []
+  hydra = Typhoeus::Hydra.hydra
 
   hits.each do |hit|
     if hit['parent_id'] != hit['story_id']
-      threads << Thread.new(hit) do |hit|
-        puts "Fetching #{hit['parent_id']}"
-        parent = fetch_item(hit['parent_id'])
-        puts "Done     #{hit['parent_id']}"
-        hit[:parent] = parent
-      end
+      fetch_item(hit['parent_id'], hit, hydra)
     end
   end
 
-  threads.each(&:join)
+  hydra.run
 end
 
 def fetch_data(users)
   user_tags = users.map {|u| "author_#{u}" }.join(',')
   url = "http://hn.algolia.com/api/v1/search_by_date?hitsPerPage=50&tags=comment,(#{user_tags})"
-  response = HTTParty.get(url)
+  response = JSON.parse(Typhoeus.get(url).body)
   hits = response['hits']
   raise FetchFailed, response.inspect unless hits
-  # fetch_all_parents(hits)
+  fetch_all_parents(hits)
   hits.each do |hit|
     content = item_content(hit)
     hit[:encoded_content] = CGI.escapeHTML(content)

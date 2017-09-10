@@ -1,19 +1,19 @@
 {
-  httparty = {
+  ethon = {
     source = {
       remotes = ["https://rubygems.org"];
-      sha256 = "0akybx7jkzhhf7f9na12jssfcllma905c8nl93ia89akbbicvq7v";
+      sha256 = "1i873cvma4j52xmij7kasjylh66vf60cy5prkp4cz4hcn9jlkznl";
       type = "gem";
     };
-    version = "0.15.6";
+    version = "0.10.1";
   };
-  multi_xml = {
+  ffi = {
     source = {
       remotes = ["https://rubygems.org"];
-      sha256 = "0lmd4f401mvravi1i1yq7b2qjjli0yq7dfc4p1nj5nwajp7r6hyj";
+      sha256 = "034f52xf7zcqgbvwbl20jwdyjwznvqnwpbaps9nk18v9lgb1dpx0";
       type = "gem";
     };
-    version = "0.6.0";
+    version = "1.9.18";
   };
   mustermann = {
     source = {
@@ -62,5 +62,13 @@
       type = "gem";
     };
     version = "2.0.8";
+  };
+  typhoeus = {
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "01pd16n6bvknyip42r1r7js0j8x8ly37gmr72z3695zcczh1blyq";
+      type = "gem";
+    };
+    version = "1.3.0";
   };
 }
