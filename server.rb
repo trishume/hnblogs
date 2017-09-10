@@ -65,34 +65,6 @@ def item_content(hit)
   ITEM_TEMPLATE.result(binding)
 end
 
-# def fetch_item(id)
-#   url = "http://hn.algolia.com/api/v1/items/#{id}"
-#   puts "Fetching #{id} from #{url}"
-#   response = HTTParty.get(url)
-#   return nil
-#   item = response.parsed_response
-#   raise FetchFailed, response.inspect unless item
-#   # pp item
-#   # item
-#   {'text' => item['comment_text'], 'by' => item['author']}
-# end
-
-# def fetch_all_parents(hits)
-#   threads = []
-
-#   hits.each do |hit|
-#     if hit['parent_id'] != hit['story_id']
-#       threads << Thread.new(hit) do |hit|
-#         parent = fetch_item(hit['parent_id'])
-#         puts "Done     #{hit['parent_id']}"
-#         hit[:parent] = parent
-#       end
-#     end
-#   end
-
-#   threads.each(&:join)
-# end
-
 def fetch_item(id, hit, hydra)
   url = "https://hacker-news.firebaseio.com/v0/item/#{id}.json"
   puts "Fetching #{id} from #{url}"
