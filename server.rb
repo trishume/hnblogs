@@ -10,7 +10,7 @@ USERS = %w{
   chrisseaton DannyBee _yosefk nkurz rsc
   phire tptacek Manishearth Veedrac
   raphlinus dbaupp gwern patio11 cperciva
-}
+}.sort_by {|w| w.downcase }
 
 # I don't bother describing people I know of really well
 DESCRIPTIONS = {
@@ -26,7 +26,12 @@ DESCRIPTIONS = {
   'pcwalton' => 'Mozilla doing Rust, WebRender, Pathfinder, Servo',
   'jblow' => 'Jai, The Witness, Braid',
   'Manishearth' => 'Rust & Servo contributor',
-  'chrisseaton' => 'Author of Truffle Ruby'
+  'chrisseaton' => 'Author of Truffle Ruby',
+  'patio11' => 'Patrick McKenzie / Kalzumeus, legendary commenter',
+  'cperciva' => 'Colin Percival of Tarsnap',
+  'gwern' => 'Writer and researcher on gwern.net',
+  '_yosefk' => 'Yossi Kreinin, good programming writer',
+  'tptacek' => 'Thomas Ptacek, security and business, legendary commenter',
 }
 
 HITS_PER_PAGE = ENV['ITEMS_TO_LOAD'] || '30'
