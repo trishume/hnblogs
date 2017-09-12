@@ -9,8 +9,21 @@ USERS = %w{
   pizlonator pcwalton jblow WalterBright
   chrisseaton DannyBee _yosefk nkurz rsc
   phire tptacek Manishearth Veedrac
-  raphlinus dbaupp gwern patio11 cperciva
+  raphlinus dbaupp gwern patio11 cperciva rayiner
 }.sort_by {|w| w.downcase }
+
+# === Good commenters who I'm still unsure if I want to include:
+# I might add some of these if I want more content, or if I add a feature
+# to filter out short posts.
+# - tzs: Recommended by tptacek, I read some back-catalog and it was
+#        pretty good but I'm not sure if I want to subscribe yet.
+# - pbsd: Recommended by tptacek, advanced crypto math that I don't
+#         understand enough to really get much value from.
+# - geofft: Recommended by tptacek. Lots of politics, I'm not sure I
+#           learned enough to want to subscribe.
+
+# TODO: add ability to filter out short (and probably not interesting)
+# comments, so that more people can be added while maintaining low load.
 
 # I don't bother describing people I know of really well
 DESCRIPTIONS = {
@@ -32,6 +45,7 @@ DESCRIPTIONS = {
   'gwern' => 'Writer and researcher on gwern.net',
   '_yosefk' => 'Yossi Kreinin, good programming writer',
   'tptacek' => 'Thomas Ptacek, security and business, legendary commenter',
+  'rayiner' => 'Lawyer and Software Engineer',
 }
 
 HITS_PER_PAGE = ENV['ITEMS_TO_LOAD'] || '30'
