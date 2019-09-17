@@ -98,7 +98,7 @@ end
 
 def fetch_data(users)
   user_tags = users.map {|u| "author_#{u}" }.join(',')
-  url = "http://hn.algolia.com/api/v1/search_by_date?hitsPerPage=#{HITS_PER_PAGE}&tags=comment,(#{user_tags})"
+  url = "https://hn.algolia.com/api/v1/search_by_date?hitsPerPage=#{HITS_PER_PAGE}&tags=comment,(#{user_tags})"
   response = JSON.parse(Typhoeus.get(url).body)
   hits = response['hits']
   raise FetchFailed, response.inspect unless hits
