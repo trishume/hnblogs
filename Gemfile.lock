@@ -6,7 +6,7 @@ GEM
     ffi (1.9.18)
     mustermann (1.0.1)
     puma (3.12.4)
-    rack (2.0.3)
+    rack (2.2.2)
     rack-protection (2.0.0)
       rack
     sinatra (2.0.0)
